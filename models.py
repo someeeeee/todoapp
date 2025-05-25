@@ -1,5 +1,5 @@
 from sqlalchemy import ForeignKey, String, BigInteger
-from sqlalchemy.orm import Mapped, DeclarativeBase, mapped_collumn
+from sqlalchemy.orm import Mapped, DeclarativeBase, mapped_column
 from sqlalchemy.ext.asyncio import AsyncAttrs, async_sessionmaker, create_async_engine
 
 
@@ -15,17 +15,17 @@ class Base(AsyncAttrs, DeclarativeBase):
 class User(Base):
     __tablename__ = 'users'
 
-    id: Mapped[int] = mapped_collumn(primary_key=True)
-    tg_id = mapped_collumn(BigInteger)
+    id: Mapped[int] = mapped_column(primary_key=True)
+    tg_id = mapped_column(BigInteger)
 
 
 class Task(Base):
     __tablename__ = 'tasks'
 
-    id: Mapped[int] = mapped_collumn(primary_key=True)
-    title: Mapped[str] = mapped_collumn(String(128))
-    completed: Mapped[bool] = mapped_collumn(default=False)
-    user: Mapped[int] = mapped_collumn(ForeignKey('users.id', ondelete='CASCADE'))
+    id: Mapped[int] = mapped_column(primary_key=True)
+    title: Mapped[str] = mapped_column(String(128))
+    completed: Mapped[bool] = mapped_column(default=False)
+    user: Mapped[int] = mapped_column(ForeignKey('users.id', ondelete='CASCADE'))
 
 
     async def init_db():
